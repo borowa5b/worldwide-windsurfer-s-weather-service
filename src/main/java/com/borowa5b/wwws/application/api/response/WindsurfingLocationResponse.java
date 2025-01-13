@@ -1,16 +1,14 @@
 package com.borowa5b.wwws.application.api.response;
 
-import com.borowa5b.wwws.domain.enumeration.City;
-import com.borowa5b.wwws.domain.enumeration.Country;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
 public record WindsurfingLocationResponse(
         @Schema(description = "Windsurfing city", example = "JASTARNIA")
-        City city,
+        String city,
         @Schema(description = "Windsurfing country code", example = "PL")
-        Country countryCode,
+        String countryCode,
         @Schema(description = "Windsurfing location forecast date", example = "2022-01-12")
         LocalDate forecastDate,
         @Schema(description = "Windsurfing location latitude", example = "-20.44509")

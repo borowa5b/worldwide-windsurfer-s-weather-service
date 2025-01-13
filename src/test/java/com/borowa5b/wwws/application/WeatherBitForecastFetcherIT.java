@@ -1,7 +1,7 @@
 package com.borowa5b.wwws.application;
 
 import com.borowa5b.wwws.IntegrationTest;
-import com.borowa5b.wwws.domain.enumeration.City;
+import com.borowa5b.wwws.domain.vo.City;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,12 +44,12 @@ class WeatherBitForecastFetcherIT {
     void shouldFetchForecast() throws IOException {
         // given
         final var daysToFetch = 2;
-        final var city = City.JASTARNIA;
+        final var city = new City("ZIELONA_GORA", 51.94260f, 15.53794f, "PL");
         final var expectedDate = LocalDate.now().plusDays(1);
         final var weatherBitResponse = new String(getClass().getClassLoader().getResourceAsStream("response/WeatherBitResponse.json").readAllBytes())
                 .replace("{date1}", LocalDate.now().toString())
                 .replace("{date2}", expectedDate.toString());
-        weatherBitServer.expect(requestTo("http://localhost:8102/forecast/daily?key=123&days=2&lat=54.69606&lon=18.67873&country=PL"))
+        weatherBitServer.expect(requestTo("http://localhost:8102/forecast/daily?key=123&days=2&lat=51.9426&lon=15.53794&country=PL"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(weatherBitResponse, MediaType.APPLICATION_JSON));
 

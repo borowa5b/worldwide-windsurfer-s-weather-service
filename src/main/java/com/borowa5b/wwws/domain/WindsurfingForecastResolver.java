@@ -1,6 +1,5 @@
 package com.borowa5b.wwws.domain;
 
-import com.borowa5b.wwws.domain.enumeration.City;
 import com.borowa5b.wwws.domain.exception.WindsurfingLocationNotFoundException;
 import com.borowa5b.wwws.domain.vo.Forecast;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +7,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -17,10 +15,12 @@ import java.util.List;
 public class WindsurfingForecastResolver {
 
     private final ForecastFetcher forecastFetcher;
+    private final CitiesResolver citiesResolver;
+
     @Cacheable(cacheNames = "forecast")
     public Forecast resolve(final LocalDate forecastDate) {
         final var daysToFetch = resolveDaysToFetch(forecastDate);
-        final var forecasts = Arrays.stream(City.values())
+        final var forecasts = citiesResolver.resolve().stream()
                 .map(city -> forecastFetcher.fetch(daysToFetch, forecastDate, city))
                 .toList();
         final var forecastWithBestConditions = resolveForecastWithBestConditions(forecasts);

@@ -1,6 +1,6 @@
 package com.borowa5b.wwws.infrastructure.weather.bit;
 
-import com.borowa5b.wwws.domain.enumeration.City;
+import com.borowa5b.wwws.domain.vo.City;
 import com.borowa5b.wwws.infrastructure.weather.bit.configuration.WeatherBitProperties;
 import com.borowa5b.wwws.infrastructure.weather.bit.response.ForecastResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,9 @@ public class WeatherBitRestClient implements WeatherBitClient {
                 .path(weatherBitProperties.getForecastUrl())
                 .queryParam("key", weatherBitProperties.getApiKey())
                 .queryParam("days", daysToFetch)
-                .queryParam("lat", city.getLatitude())
-                .queryParam("lon", city.getLongitude())
-                .queryParam("country", city.getCountry())
+                .queryParam("lat", city.latitude())
+                .queryParam("lon", city.longitude())
+                .queryParam("country", city.country())
                 .toUriString();
         return restTemplate.getForObject(uriString, ForecastResponse.class);
     }

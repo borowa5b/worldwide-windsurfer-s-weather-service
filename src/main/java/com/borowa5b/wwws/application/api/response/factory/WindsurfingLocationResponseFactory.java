@@ -12,11 +12,11 @@ public class WindsurfingLocationResponseFactory {
 
         final var city = forecast.city();
         return new WindsurfingLocationResponse(
-                city,
-                city.getCountry(),
+                city.name(),
+                city.country(),
                 forecast.forecastDate(),
-                city.getLatitude(),
-                city.getLongitude(),
+                city.latitude(),
+                city.longitude(),
                 forecast.avgTemperature(),
                 forecast.windSpeed()
         );

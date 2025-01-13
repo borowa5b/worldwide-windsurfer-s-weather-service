@@ -1,5 +1,5 @@
 {
-  "city_name": "Jastarnia",
+  "city_name": "Zielona Góra",
   "country_code": "PL",
   "data": [
     {
@@ -91,8 +91,8 @@
       "wind_spd": 9.7
     }
   ],
-  "lat": "54.69606",
-  "lon": "18.67873",
+  "lat": "51.9426",
+  "lon": "15.53794",
   "state_code": "82",
   "timezone": "Europe/Warsaw"
 }

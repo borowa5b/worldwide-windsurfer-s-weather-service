@@ -1,7 +1,7 @@
 package com.borowa5b.wwws.application;
 
 import com.borowa5b.wwws.domain.ForecastFetcher;
-import com.borowa5b.wwws.domain.enumeration.City;
+import com.borowa5b.wwws.domain.vo.City;
 import com.borowa5b.wwws.domain.vo.Forecast;
 import com.borowa5b.wwws.infrastructure.weather.bit.WeatherBitClient;
 import lombok.RequiredArgsConstructor;

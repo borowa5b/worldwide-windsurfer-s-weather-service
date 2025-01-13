@@ -1,7 +1,7 @@
 package com.borowa5b.wwws.application.api;
 
 import com.borowa5b.wwws.IntegrationTest;
-import com.borowa5b.wwws.domain.enumeration.City;
+import com.borowa5b.wwws.domain.CitiesResolver;
 import com.borowa5b.wwws.domain.exception.ValidationException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +31,9 @@ class GetWindsurfingLocationEndpointIT {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private CitiesResolver citiesResolver;
+
     private MockRestServiceServer weatherBitServer;
 
     @BeforeEach
@@ -50,7 +53,7 @@ class GetWindsurfingLocationEndpointIT {
         final var weatherBitResponse = new String(getClass().getClassLoader().getResourceAsStream("response/WeatherBitResponse.json").readAllBytes())
                 .replace("{date1}", LocalDate.now().toString())
                 .replace("{date2}", LocalDate.now().plusDays(1).toString());
-        weatherBitServer.expect(ExpectedCount.times(City.values().length), request -> assertThat("/forecast/daily").isEqualTo(request.getURI().getPath()))
+        weatherBitServer.expect(ExpectedCount.times(citiesResolver.resolve().size()), request -> assertThat("/forecast/daily").isEqualTo(request.getURI().getPath()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(weatherBitResponse, MediaType.APPLICATION_JSON));
 
