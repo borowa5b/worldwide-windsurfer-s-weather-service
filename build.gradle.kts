@@ -54,3 +54,8 @@ tasks.named<BootRun>("bootRun") {
         systemProperty("spring.profiles.active", "local")
     }
 }
+
+// Disable generating plain archive jar
+tasks.named<Jar>("jar") {
+    enabled = false
+}
